@@ -1,0 +1,17 @@
+package rules
+import com.ngfs.ruleengine.model.Loan
+
+rule "Offer for Personal"
+	when 
+		productObject: Loan(type=="personal")
+	then
+	     System.out.println("Here");
+		productObject.setInterest(10);
+	end
+rule "Offer for Home"
+	when 
+		productObject: Loan(type=="home")
+	then
+	    System.out.println("Here");
+		productObject.setInterest(8);
+	end

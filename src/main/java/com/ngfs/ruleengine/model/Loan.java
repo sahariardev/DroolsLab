@@ -22,6 +22,10 @@ public class Loan {
 	public void setInterest(long interest) {
 		this.interest = interest;
 	}
+	@Override
+	public String toString() {
+		return "Loan [id=" + id + ", type=" + type + ", interest=" + interest + "]";
+	}
 	
 	
 

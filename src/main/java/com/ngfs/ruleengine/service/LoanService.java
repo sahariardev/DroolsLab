@@ -6,17 +6,26 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 import org.drools.compiler.compiler.DroolsParserException;
-import org.drools.compiler.compiler.PackageBuilder;
-import org.drools.core.RuleBase;
-import org.drools.core.RuleBaseFactory;
+
 import org.drools.core.WorkingMemory;
+import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ngfs.ruleengine.model.Loan;
 
 @Service
 public class LoanService {
+	
 
+	private final KieContainer kieContainer;
+
+	@Autowired
+	public LoanService(KieContainer kieContainer) {
+		this.kieContainer = kieContainer;
+	}
+     /*
 	public long calculateInterestRate() throws DroolsParserException, IOException
 	{
 		
@@ -62,5 +71,18 @@ public class LoanService {
 		workingMemory.fireAllRules();
 		
 		return loan.getInterest();
+	}*/
+	
+	public Loan calculateInterestRate(Loan loan)
+	{
+		System.out.println("hit");
+		KieSession kieSession = kieContainer.newKieSession("rulesSession");
+		
+
+		kieSession.insert(loan);
+		kieSession.fireAllRules();
+		kieSession.dispose();
+		System.out.println(loan);
+		return loan;
 	}
 }
