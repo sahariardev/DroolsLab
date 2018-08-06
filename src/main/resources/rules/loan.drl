@@ -1,0 +1,35 @@
+package rules
+import com.ngfs.ruleengine.request.LoanRequestContainer
+
+    rule "Check applicant name"
+	when 
+		rc: LoanRequestContainer(request.applicant==null)
+	then
+	    rc.getMessage().addMessage("Applicant name is not filled");
+	    rc.getMessage().setAcceptable(false);
+	    
+	end
+	rule "Check Loan Type"
+	when 
+		rc: LoanRequestContainer(request.type==null)
+	then
+	    rc.getMessage().addMessage("Loan type is not filled");
+	    rc.getMessage().setAcceptable(false);
+	    
+	end
+	rule "Check applicant age"
+	when 
+		rc: LoanRequestContainer(request.age==null)
+	then
+	    rc.getMessage().addMessage("Applicant age is not filled");
+	    rc.getMessage().setAcceptable(false);
+	    
+	end
+	rule "Check applicant age status"
+	when 
+		rc: LoanRequestContainer(request.age<=10)
+	then
+	    rc.getMessage().addMessage("Applicant age is below 10.");
+	    rc.getMessage().setAcceptable(false);
+	    
+	end
