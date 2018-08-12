@@ -12,8 +12,10 @@ public class RuleengineApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RuleengineApplication.class, args);
 	}
+	
 	@Bean
 	public KieContainer kieContainer() {
 		return KieServices.Factory.get().getKieClasspathContainer();
 	}
+	
 }

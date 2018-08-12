@@ -19,7 +19,7 @@ import com.ngfs.ruleengine.request.LoanRequestContainer
 	end
 	rule "Check applicant age"
 	when 
-		rc: LoanRequestContainer(request.age==null)
+		rc: LoanRequestContainer(request.age==0)
 	then
 	    rc.getMessage().addMessage("Applicant age is not filled");
 	    rc.getMessage().setAcceptable(false);
@@ -27,7 +27,7 @@ import com.ngfs.ruleengine.request.LoanRequestContainer
 	end
 	rule "Check applicant age status"
 	when 
-		rc: LoanRequestContainer(request.age<=10)
+		rc: LoanRequestContainer(request.age!=0 && request.age<=10)
 	then
 	    rc.getMessage().addMessage("Applicant age is below 10.");
 	    rc.getMessage().setAcceptable(false);

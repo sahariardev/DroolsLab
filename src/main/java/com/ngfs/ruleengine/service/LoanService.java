@@ -1,5 +1,7 @@
 package com.ngfs.ruleengine.service;
 
+import org.kie.api.KieServices;
+import org.kie.api.builder.KieScanner;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +13,14 @@ import com.ngfs.ruleengine.request.LoanRequestContainer;
 @Service
 public class LoanService {
 	
-
+     
 	private final KieContainer kieContainer;
 
 	@Autowired
 	public LoanService(KieContainer kieContainer) {
 		this.kieContainer = kieContainer;
 	}
+	
      /*
 	public long calculateInterestRate() throws DroolsParserException, IOException
 	{
@@ -78,10 +81,12 @@ public class LoanService {
 		System.out.println(loan);
 		return loan;
 	}
+	
 	public LoanRequestContainer checkLoanForm(LoanRequestContainer requestContainer)
 	{
-		System.out.println("hit");
+		
 		KieSession kieSession = kieContainer.newKieSession("loanSession");
+		
 		
 
 		kieSession.insert(requestContainer);
